@@ -1,53 +1,38 @@
-// To parse this JSON data, do
-//
-//     final badgeDataModel = badgeDataModelFromJson(jsonString);
+import 'package:json_annotation/json_annotation.dart';
 
-import 'dart:convert';
+import '../../../core/base/model/base_model.dart';
 
-List<BadgeDataModel> badgeDataModelFromJson(String str) => List<BadgeDataModel>.from(json.decode(str).map((x) => BadgeDataModel.fromJson(x)));
+part 'badge_data_model.g.dart';
 
-String badgeDataModelToJson(List<BadgeDataModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
-
-class BadgeDataModel {
+@JsonSerializable()
+class BadgeDataModel extends BaseModel<BadgeDataModel> {
     BadgeDataModel({
-        required this.odataType,
-        required this.odataId,
-        required this.odataEtag,
-        required this.odataEditLink,
-        required this.badgeDataModelId,
-        required this.title,
-        required this.badgeIcon,
-        required this.id,
+        this.odataType,
+        this.odataId,
+        this.odataEtag,
+        this.odataEditLink,
+        this.title,
+        this.badgeIcon,
+        this.id,
     });
 
-    String odataType;
-    String odataId;
-    String odataEtag;
-    String odataEditLink;
-    int badgeDataModelId;
-    String title;
-    String badgeIcon;
-    int id;
+    String? odataType;
+    String? odataId;
+    String? odataEtag;
+    String? odataEditLink;
+    String? title;
+    String? badgeIcon;
+    int? id;
 
-    factory BadgeDataModel.fromJson(Map<String, dynamic> json) => BadgeDataModel(
-        odataType: json["odata.type"],
-        odataId: json["odata.id"],
-        odataEtag: json["odata.etag"],
-        odataEditLink: json["odata.editLink"],
-        badgeDataModelId: json["Id"],
-        title: json["Title"],
-        badgeIcon: json["BadgeIcon"],
-        id: json["ID"],
-    );
+    factory BadgeDataModel.fromJson(Map<String, dynamic> json) => _$BadgeDataModelFromJson(json);
+    
+    @override
+    BadgeDataModel fromJson(Map<String, dynamic> json) {
+    return _$BadgeDataModelFromJson(json);
+    }
 
-    Map<String, dynamic> toJson() => {
-        "odata.type": odataType,
-        "odata.id": odataId,
-        "odata.etag": odataEtag,
-        "odata.editLink": odataEditLink,
-        "Id": badgeDataModelId,
-        "Title": title,
-        "BadgeIcon": badgeIcon,
-        "ID": id,
-    };
+    @override
+    Map<String, dynamic> toJson() {
+    return _$BadgeDataModelToJson(this);
+    }
 }

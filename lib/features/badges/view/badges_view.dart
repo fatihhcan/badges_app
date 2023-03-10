@@ -1,3 +1,4 @@
+import 'package:badges_app/core/components/card/slider_card.dart';
 import 'package:badges_app/core/extensions/context_extension.dart';
 import 'package:badges_app/features/badges/cubit/badges_cubit.dart';
 import 'package:flutter/material.dart';
@@ -27,23 +28,27 @@ class BadgesView extends StatelessWidget {
             backgroundColor: context.appColors.white,
           ),
           body: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-                  BlocBuilder<BadgesCubit, BadgesState>(
-                  builder: (context, state) {
-                    return state.loading ? const CircularProgressIndicator() : Expanded(
-                                  child: Padding(
-                                    padding: context.paddingLowAll,
-                                    child: ListView.builder(
-                                    itemCount: cubit.badgesList.length,
-                                    itemBuilder: (BuildContext context, index) {
-                                    return Center(
-                                      child: Text(cubit.badgesList[index].title!),
-                                    );              
-                                    }),
-                                  ),
-                                );
-                  },
-                ),
+              Center(child: SliderCard(praiseRating: "4,5", praiseCount: "32", initialRaiting: 4,))
+              
+                //   BlocBuilder<BadgesCubit, BadgesState>(
+                //   builder: (context, state) {
+                //     return state.loading ? const CircularProgressIndicator() : Expanded(
+                //                   child: Padding(
+                //                     padding: context.paddingLowAll,
+                //                     child: ListView.builder(
+                //                     itemCount: cubit.badgesList.length,
+                //                     itemBuilder: (BuildContext context, index) {
+                //                     return Center(
+                //                       child: Text(cubit.badgesList[index].title!),
+                //                     );              
+                //                     }),
+                //                   ),
+                //                 );
+                //   },
+                // ),
           ],
 
 

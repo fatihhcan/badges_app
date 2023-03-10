@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 
 class TextThemeManager {
   static TextThemeManager? _instance;
@@ -13,8 +13,8 @@ class TextThemeManager {
   TextTheme textTheme({bool isDark = false}) {
     return TextTheme(
       headline1: TextStyle(
-        fontFamily: 'Gotham',
-        fontSize: 30.sp,
+        fontFamily: 'Gotham-Black',
+        fontSize: 30,
         fontWeight: FontWeight.w700,
         decoration: TextDecoration.underline,
         color: Colors.white,
@@ -22,16 +22,17 @@ class TextThemeManager {
       ),
       
    headline3: TextStyle(
-        fontFamily: 'Gotham',
-        fontSize: 24.sp,
+        fontFamily: 'Gotham-Bold',
+        fontSize: 24,
         decoration: TextDecoration.underline,
+        fontWeight: FontWeight.w400,
         color: Colors.white,
         decorationColor: Colors.white.withOpacity(0.01),
       ),
 
       headline4: TextStyle(
-        fontFamily: 'Gotham',
-        fontSize: 22.sp,
+        fontFamily: 'Gotham-Bold',
+        fontSize: 22,
         decoration: TextDecoration.underline,
         fontWeight: FontWeight.w700,
         color: Colors.white,
@@ -39,30 +40,29 @@ class TextThemeManager {
       ),
 
       headline5: TextStyle(
-        fontFamily: 'Gotham',
-        fontSize: 14.sp,
-        fontWeight: FontWeight.w600,
+        fontFamily: 'Gotham-Book',
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
         decoration: TextDecoration.underline,
         color: Colors.white,
         decorationColor: Colors.white.withOpacity(0.01),
       ),
 
       bodyText1: TextStyle(
-        fontFamily: 'Gotham',
-        fontSize: 13.sp,
-        fontWeight: FontWeight.w600,
+        fontFamily: 'Gotham-Book',
+        fontSize: 13,
         decoration: TextDecoration.underline,
         color: Colors.white,
         decorationColor: Colors.white.withOpacity(0.01),
       ),
 
       subtitle1:  TextStyle(
-        fontFamily: 'Gotham',
-        fontSize: 12.sp,
-        fontWeight: FontWeight.w700,
+        fontFamily: 'Gotham-Medium',
+        fontSize: 10,
         decoration: TextDecoration.underline,
-        color: Colors.white,
+        color: Colors.black.withOpacity(0.3),
         decorationColor: Colors.white.withOpacity(0.01),
+        
       ),
     );
   }

@@ -35,4 +35,5 @@ class BadgesService extends IBadgesService {
     AppStateManager.instance.users = result!;
     return result;
   }
+
 }

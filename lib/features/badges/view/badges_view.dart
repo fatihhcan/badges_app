@@ -1,5 +1,6 @@
 import 'package:badges_app/core/components/badges/badges.dart';
 import 'package:badges_app/core/components/card/slider_card.dart';
+import 'package:badges_app/core/components/card/user_rating_card.dart';
 import 'package:badges_app/core/constants/text/text_constants.dart';
 import 'package:badges_app/core/extensions/context_extension.dart';
 import 'package:badges_app/features/badges/cubit/badges_cubit.dart';
@@ -77,6 +78,23 @@ class BadgesView extends StatelessWidget {
                             ),
                             position: 1,                       
                           ),  
+                          SizedBox(height: 33.h,),
+                        Expanded(
+                          child: ListView.separated(
+                            separatorBuilder: (context, index) => SizedBox(height: 12.h,),
+                                  itemCount: cubit.badgesList.length,
+                                  itemBuilder: (BuildContext context, int index) {
+                                    return UserRatingCard(
+                                      userName: cubit.usersList[index].authorTitle!,
+                                      time: cubit.usersList[index].created!,
+                                      badgeTitle: cubit.badgesList[index].title!,
+                                      badgeIcon: cubit.badgesIcon(index),
+                                      initialBadgeRaiting: double.parse(cubit.usersList[index].praiseRating!),
+                                      description:cubit.usersList[index].message!,
+                                    );
+                                  }),
+                        ),
+    
                         ],
                       ),
                   );

@@ -21,14 +21,14 @@ class BadgesCubit extends Cubit<BadgesState> with BaseCubit {
   late List<Author> authorList = [];
   late ScrollController controller;
   @override
-  void init() async {
+  void init()  {
     initService();
   }
 
-  void initService() {
+  void initService() async {
     badgesService = BadgesService();
     controller = ScrollController();
-    fetchLocalBadges();
+    await fetchLocalBadges();
   }
 
   void localFetchLoading(bool loading) {
@@ -39,13 +39,16 @@ class BadgesCubit extends Cubit<BadgesState> with BaseCubit {
     localFetchLoading(true);
     await badgesService.fetchLocalBadges();
     await badgesService.fetchLocalUsers();
+
     badgesList = AppStateManager.instance.badges;
     usersList = AppStateManager.instance.users;
+    badgeUserList = AppStateManager.instance.badgeUsers;
     localFetchLoading(false);
   }
 
+  
+
   String badgesIcon(int index) {
- 
     if (badgesList[index].id.toString() == '3') {
       return ImageConstants.instance.addingValue;
     } else if (badgesList[index].id.toString() == '4') {
@@ -66,6 +69,7 @@ class BadgesCubit extends Cubit<BadgesState> with BaseCubit {
       return ImageConstants.instance.innovative;
     }
   }
+
 
   @override
   void setContext(BuildContext context) => this.context = context;

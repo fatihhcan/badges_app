@@ -2,6 +2,9 @@
 
 Badges application.
 
+<img width="350" alt="Screenshot 2023-03-11 at 23 21 05" src="https://user-images.githubusercontent.com/45641833/224509919-ba823479-3dd9-49fa-9e0f-9fa912ee5faa.png">
+
+
 # Subject
 
 - BLoC/Cubit was used for State Management.

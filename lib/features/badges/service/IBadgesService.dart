@@ -7,5 +7,4 @@ abstract class IBadgesService {
 
   Future<List<BadgeDataModel?>>  fetchLocalBadges();
   Future<List<UsersDataModel?>>  fetchLocalUsers();
-
 }

@@ -24,8 +24,15 @@ class BadgesService extends IBadgesService {
   }
 
   @override
-  Future<List<UsersDataModel?>> fetchLocalUsers() {
-    // TODO: implement fetchUsers
-    throw UnimplementedError();
+  Future<List<UsersDataModel?>> fetchLocalUsers() async {
+    var localData = await rootBundle.loadString(AppConstants.LIST_DATA_PATH);
+
+    Map<String, dynamic> map = json.decode(localData);
+    final List<UsersDataModel>? result =
+        ResponseParser<UsersDataModel>(response: map['Row'])
+            .fromList<List<UsersDataModel>>(model: UsersDataModel());
+
+    AppStateManager.instance.users = result!;
+    return result;
   }
 }

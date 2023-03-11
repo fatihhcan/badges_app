@@ -12,7 +12,7 @@ UsersDataModel _$UsersDataModelFromJson(Map<String, dynamic> json) =>
       principalCount: json['PrincipalCount'] as String?,
       praiseRating: json['PraiseRating'] as String?,
       message: json['Message'] as String?,
-      badge: json['Badge'] as List<dynamic>?,
+      badge: json['Badge'] == null ? null : List<Badge>.from(json['Badge'].map((x) => Badge.fromJson(x))),
       author: json['Author'] as List<dynamic>?,
       created: json['Created'] as String?,
       id: json['ID'] as String?,
@@ -29,3 +29,6 @@ Map<String, dynamic> _$UsersDataModelToJson(UsersDataModel instance) =>
       'Author': instance.author,
       'RelatedPerson': instance.relatedPerson,
     };
+//         review: json["review"] == null
+//             ? null
+//             : List<Review>.from(json["review"].map((x) => Review.fromJson(x))),

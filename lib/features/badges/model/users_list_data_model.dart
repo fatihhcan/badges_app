@@ -1,3 +1,4 @@
+import 'package:badges_app/features/badges/model/list_user_badge_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../../core/base/model/base_model.dart';
@@ -22,7 +23,7 @@ class UsersDataModel extends BaseModel<UsersDataModel> {
    String? principalCount;
    String? message;
    String? created;
-   List<dynamic>? badge;
+   List<Badge>? badge;
    List<dynamic>? author;
    List<dynamic>? relatedPerson;
 

@@ -47,53 +47,9 @@ class BadgesView extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           SizedBox(height: 20.h,),
-                          SliderCard(
-                            praiseRating: cubit.usersList[0].praiseRating,
-                            praiseCount: cubit.usersList[0].principalCount,
-                            initialRaiting: double.parse(cubit.usersList[0].praiseRating!),
-                            // ignore: sort_child_properties_last
-                            child: SizedBox(
-                              height: 150.h,
-                              width: double.infinity,
-                              child: GridView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: cubit.badgesList.length,
-                                  controller: cubit.controller,
-                                  gridDelegate:
-                                   const SliverGridDelegateWithFixedCrossAxisCount(
-                                          crossAxisCount: 2,
-                                          mainAxisExtent: 150,
-                                          childAspectRatio: 1 / 2,
-                                          crossAxisSpacing: 16,
-                                          mainAxisSpacing: 45,                                                                            
-                                          ),                              
-                                  itemBuilder: (BuildContext ctx, index) {
-                                    return Badges(                                    
-                                      badgesIcon: cubit.badgesIcon(index),
-                                      badgesTitle: cubit.badgesList[index].title,
-                                      praiseCount: cubit.usersList[index].praiseRating, 
-                                      initialBadgeRaiting: double.parse(cubit.usersList[index].praiseRating!),
-                                    );
-                                  }),
-                            ),
-                            position: 1,                       
-                          ),  
+                          buildSilederCard(cubit),  
                           SizedBox(height: 33.h,),
-                        Expanded(
-                          child: ListView.separated(
-                            separatorBuilder: (context, index) => SizedBox(height: 12.h,),
-                                  itemCount: cubit.badgesList.length,
-                                  itemBuilder: (BuildContext context, int index) {
-                                    return UserRatingCard(
-                                      userName: cubit.usersList[index].authorTitle!,
-                                      time: cubit.usersList[index].created!,
-                                      badgeTitle: cubit.badgesList[index].title!,
-                                      badgeIcon: cubit.badgesIcon(index),
-                                      initialBadgeRaiting: double.parse(cubit.usersList[index].praiseRating!),
-                                      description:cubit.usersList[index].message!,
-                                    );
-                                  }),
-                        ),
+                          buildUserRatingCard(cubit),
     
                         ],
                       ),
@@ -103,5 +59,55 @@ class BadgesView extends StatelessWidget {
     );
   }
 
+  Expanded buildUserRatingCard(BadgesCubit cubit) {
+    return Expanded(
+                        child: ListView.separated(
+                          separatorBuilder: (context, index) => SizedBox(height: 12.h,),
+                                itemCount: cubit.badgesList.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return UserRatingCard(
+                                    userName: cubit.usersList[index].authorTitle!,
+                                    time: cubit.usersList[index].created!,
+                                    badgeTitle: cubit.badgesList[index].title!,
+                                    badgeIcon: cubit.badgesIcon(index),
+                                    initialBadgeRaiting: double.parse(cubit.usersList[index].praiseRating!),
+                                    description:cubit.usersList[index].message!,
+                                  );
+                                }),
+                      );
+  }
 
+  SliderCard buildSilederCard(BadgesCubit cubit) {
+    return SliderCard(
+                          praiseRating: cubit.usersList[0].praiseRating,
+                          praiseCount: cubit.usersList[0].principalCount,
+                          initialRaiting: double.parse(cubit.usersList[0].praiseRating!),
+                          // ignore: sort_child_properties_last
+                          child: SizedBox(
+                            height: 150.h,
+                            width: double.infinity,
+                            child: GridView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: cubit.badgesList.length,
+                                controller: cubit.controller,
+                                gridDelegate:
+                                 const SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 2,
+                                        mainAxisExtent: 150,
+                                        childAspectRatio: 1 / 2,
+                                        crossAxisSpacing: 16,
+                                        mainAxisSpacing: 45,                                                                            
+                                        ),                              
+                                itemBuilder: (BuildContext ctx, index) {
+                                  return Badges(                                    
+                                    badgesIcon: cubit.badgesIcon(index),
+                                    badgesTitle: cubit.badgesList[index].title,
+                                    praiseCount: cubit.usersList[index].praiseRating, 
+                                    initialBadgeRaiting: double.parse(cubit.usersList[index].praiseRating!),
+                                  );
+                                }),
+                          ),
+                          position: 1,                       
+                        );
+  }
 }

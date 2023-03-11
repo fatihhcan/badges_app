@@ -57,21 +57,25 @@ class SliderCard extends StatelessWidget {
             ),
             child: child!,
           ),
-          Padding(
-            padding: context.paddingHighHorizontal *1.7,
-            child: DotsIndicator(
-              dotsCount: 3,
-              position: position!,
-              decorator: DotsDecorator(
-                color: context.appColors.dotsSliderColor
-                    .withOpacity(0.5), // Inactive color
-                activeColor: context.appColors.dotsSliderColor,
-              ),
-            ),
-          )
+          buildDotsIndicator(context)
         ],
       ),
     );
+  }
+
+  Padding buildDotsIndicator(BuildContext context) {
+    return Padding(
+          padding: context.paddingHighHorizontal *1.7,
+          child: DotsIndicator(
+            dotsCount: 3,
+            position: position!,
+            decorator: DotsDecorator(
+              color: context.appColors.dotsSliderColor
+                  .withOpacity(0.5), // Inactive color
+              activeColor: context.appColors.dotsSliderColor,
+            ),
+          ),
+        );
   }
 
   Padding cardTitleAndRaitingBar(BuildContext context) {

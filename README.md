@@ -31,6 +31,237 @@ Badges application.
 **json_annotation:** Classes and helper functions that support JSON code generation via the `json_serializable` package.
 
 # Tasks 📋
+## UI/UX
+**Slider Card**
+
+<img width="489" alt="Screenshot 2023-03-12 at 12 22 54" src="https://user-images.githubusercontent.com/45641833/224535869-e96142ad-f31d-4be5-9cb6-17c3a2d3027d.png">
+<img width="221" alt="Screenshot 2023-03-12 at 12 25 48" src="https://user-images.githubusercontent.com/45641833/224535963-4c88ad35-69b8-4445-85cc-08cf1bd88ccd.png">
+
+```dart
+
+   @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 258.h,
+      width: 343.w,
+      decoration: BoxDecoration(
+        color: context.appColors.white,
+        borderRadius: BorderRadius.all(context.lowRadius),
+        boxShadow: const [
+          BoxShadow(
+            color: Color.fromRGBO(0, 0, 0, 0.16),
+            blurRadius: 16,
+            offset: Offset(0, 8),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              flagIconAndPraiseRaitng(context),
+              cardTitleAndRaitingBar(context),
+            ],
+          ),
+          SizedBox(
+            height: 20.h,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 16,
+            ),
+            child: child!,
+          ),
+          buildDotsIndicator(context)
+        ],
+      ),
+    );
+  }
+```
+
+**User Rating Card**
+
+<img width="475" alt="Screenshot 2023-03-12 at 12 26 36" src="https://user-images.githubusercontent.com/45641833/224536030-a4fdacc5-4a4f-4fc1-a57c-049667783b5b.png">
+<img width="179" alt="Screenshot 2023-03-12 at 12 26 48" src="https://user-images.githubusercontent.com/45641833/224536033-8a03551f-b2e1-4167-91b5-5ec887d8a28a.png">
+
+```dart
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 207.h,
+      width: 345.w,
+      decoration: BoxDecoration(
+        color: context.appColors.white,
+        borderRadius: BorderRadius.all(context.normalRadius),
+        boxShadow: const [
+          BoxShadow(
+            color: Color.fromRGBO(0, 0, 0, 0.16),
+            blurRadius: 16,
+            offset: Offset(0, 8),
+          ),
+        ],
+      ),
+      child: Padding(
+        padding: const EdgeInsets.only(left: 16),
+        child: Column(
+          children: [
+            SizedBox(
+              height: 12.5.h,
+            ),
+            profileBuild(context),
+            SizedBox(
+              height: 16.5.h,
+            ),
+            badgeBuild(context),
+            SizedBox(
+              height: 5.51.h,
+            ),
+            descriptionBuild(context)
+          ],
+        ),
+      ),
+    );
+  }
+```
+**Theme**
+
+*app_colors.dart*
+```dart
+abstract class AppColors {
+  //Unique Colors
+
+  Color white = 'FFFFFF'.color;
+  Color tundora = '4A4A4A'.color;
+  Color black = '000000'.color;
+  Color silver = 'C4C4C4'.color;
+
+  //Overrided Colors
+
+  late Color textColor;
+  late Color unitColor;
+  late Color backgroundColor;
+  late Color dotsSliderColor;
+}
+
+class LightColors extends AppColors {
+  @override
+  Color get textColor => tundora;
+
+  @override
+  Color get unitColor => black;
+
+  @override
+  Color get backgroundColor => white;
+
+  @override
+  Color get dotsSliderColor => silver;
+}
+
+```
+
+*app_theme_manager.dart*
+```dart
+class AppThemeManager extends AppTheme {
+  static AppThemeManager? _instance;
+  static AppThemeManager get instance {
+    return _instance ??= AppThemeManager._init();
+  }
+
+  AppThemeManager._init();
+
+  @override
+  ThemeData get lightTheme => ThemeData(
+      brightness: Brightness.light,
+      scaffoldBackgroundColor: LightColors().white,
+      backgroundColor: LightColors().white,
+      fontFamily: 'Gotham',
+      textTheme: TextThemeManager.instance.textTheme(),
+     );
+}
+
+```
+
+*text_theme.dart*
+
+*-It has been used in special places in this way.*
+
+```dart
+ style: context.textTheme.headline4!.copyWith(
+                          color: context.appColors.textColor,
+                          fontFamily: 'Gotham-Medium'),
+```
+```dart
+class TextThemeManager {
+  static TextThemeManager? _instance;
+  static TextThemeManager get instance {
+    return _instance ??= TextThemeManager.init();
+  }
+
+  TextThemeManager.init();
+
+  TextTheme textTheme({bool isDark = false}) {
+    return TextTheme(
+      headline1: TextStyle(
+        fontFamily: 'Gotham-Black',
+        fontSize: 30,
+        fontWeight: FontWeight.w700,
+        decoration: TextDecoration.underline,
+        color: Colors.white,
+        decorationColor: Colors.white.withOpacity(0.01),
+      ),
+      
+   headline3: TextStyle(
+        fontFamily: 'Gotham-Bold',
+        fontSize: 24,
+        decoration: TextDecoration.underline,
+        fontWeight: FontWeight.w400,
+        color: Colors.white,
+        decorationColor: Colors.white.withOpacity(0.01),
+      ),
+
+      headline4: TextStyle(
+        fontFamily: 'Gotham-Bold',
+        fontSize: 22,
+        decoration: TextDecoration.underline,
+        fontWeight: FontWeight.w700,
+        color: Colors.white,
+        decorationColor: Colors.white.withOpacity(0.01),
+      ),
+
+      headline5: TextStyle(
+        fontFamily: 'Gotham-Book',
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+        decoration: TextDecoration.underline,
+        color: Colors.white,
+        decorationColor: Colors.white.withOpacity(0.01),
+      ),
+
+      bodyText1: TextStyle(
+        fontFamily: 'Gotham-Book',
+        fontSize: 13,
+        decoration: TextDecoration.underline,
+        color: Colors.white,
+        decorationColor: Colors.white.withOpacity(0.01),
+      ),
+
+      subtitle1:  TextStyle(
+        fontFamily: 'Gotham-Medium',
+        fontSize: 10,
+        decoration: TextDecoration.underline,
+        color: Colors.black.withOpacity(0.3),
+        decorationColor: Colors.white.withOpacity(0.01),
+        
+      ),
+    );
+  }
+}
+
+```
+
 
 ## Badges Service
 

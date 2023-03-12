@@ -62,6 +62,7 @@ class BadgesView extends StatelessWidget {
   Expanded buildUserRatingCard(BadgesCubit cubit) {
     return Expanded(
                         child: ListView.separated(
+                          clipBehavior: Clip.none,
                           separatorBuilder: (context, index) => SizedBox(height: 12.h,),
                                 itemCount: cubit.badgesList.length,
                                 itemBuilder: (BuildContext context, int index) {

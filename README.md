@@ -261,8 +261,156 @@ class TextThemeManager {
 }
 
 ```
+## Models
+
+*author_model.dart*
+```dart
+
+part 'author_model.g.dart';
+
+@JsonSerializable()
+class Author extends BaseModel<Author>{
+    Author({
+       this.id,
+         this.title,
+         this.email,
+         this.sip,
+         this.picture,
+    });
+
+    String? id;
+    String? title;
+    String? email;
+    String? sip;
+    String? picture;
+
+    factory Author.fromJson(Map<String, dynamic> json) => _$AuthorFromJson(json);
+    
+    @override
+    Author fromJson(Map<String, dynamic> json) {
+    return _$AuthorFromJson(json);
+    }
+
+    @override
+    Map<String, dynamic> toJson() {
+    return _$AuthorToJson(this);
+    }
+}
+```
+
+*badge_data_model.dart*
+```dart
+
+part 'badge_data_model.g.dart';
+
+@JsonSerializable()
+class BadgeDataModel extends BaseModel<BadgeDataModel> {
+    BadgeDataModel({
+        this.odataType,
+        this.odataId,
+        this.odataEtag,
+        this.odataEditLink,
+        this.title,
+        this.badgeIcon,
+        this.id,
+    });
+
+    String? odataType;
+    String? odataId;
+    String? odataEtag;
+    String? odataEditLink;
+    String? title;
+    String? badgeIcon;
+    int? id;
+
+    factory BadgeDataModel.fromJson(Map<String, dynamic> json) => _$BadgeDataModelFromJson(json);
+    
+    @override
+    BadgeDataModel fromJson(Map<String, dynamic> json) {
+    return _$BadgeDataModelFromJson(json);
+    }
+
+    @override
+    Map<String, dynamic> toJson() {
+    return _$BadgeDataModelToJson(this);
+    }
+}
+```
+*user_list_data_model.dart*
+```dart
 
 
+part 'users_list_data_model.g.dart';
+
+@JsonSerializable()
+class UsersDataModel extends BaseModel<UsersDataModel> {
+  UsersDataModel({
+    this.relatedPerson,
+    this.principalCount,
+    this.praiseRating,
+    this.message,
+    this.badge,
+    this.author,
+    this.created,
+    this.authorTitle,
+    this.id,
+  });
+  String? id;
+  String? praiseRating;
+  String? principalCount;
+  String? message;
+  String? created;
+  String? authorTitle;
+  List<Badge>? badge;
+  List<Author>? author;
+  List<dynamic>? relatedPerson;
+
+  factory UsersDataModel.fromJson(Map<String, dynamic> json) =>
+      _$UsersDataModelFromJson(json);
+
+  @override
+  UsersDataModel fromJson(Map<String, dynamic> json) {
+    return _$UsersDataModelFromJson(json);
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$UsersDataModelToJson(this);
+  }
+}
+
+```
+*list_user_badge_model.dart*
+```dart
+
+part 'list_user_badge_model.g.dart';
+
+@JsonSerializable()
+class Badge extends BaseModel<Badge> {
+    Badge({
+         this.lookupId,
+         this.lookupValue,
+         this.isSecretFieldValue,
+    });
+
+    int? lookupId;
+    String? lookupValue;
+    bool? isSecretFieldValue;
+
+        factory Badge.fromJson(Map<String, dynamic> json) => _$BadgeFromJson(json);
+    
+    @override
+    Badge fromJson(Map<String, dynamic> json) {
+    return _$BadgeFromJson(json);
+    }
+
+    @override
+    Map<String, dynamic> toJson() {
+    return _$BadgeToJson(this);
+    }
+
+}
+```
 ## Badges Service
 
 ```dart
